@@ -1,0 +1,71 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>Index</PageTitle>
+
+@if (personas == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha de nacimiento</th>
+            <th>Años de experiencia</th>
+            <th>Descripción</th>
+            <th>Empleo</th>
+            <th>Foto</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@personas[i].Nombre</td>
+                <td>@personas[i].Apellidos</td>
+                <td>@personas[i].FecNacimiento</td>
+                <td>@personas[i].AniosExperiencia</td>
+                <td>@personas[i].Descripcion</td>
+                <td>@personas[i].Empleo</td>
+                <td><img src="@personas[i].Foto" alt=""/></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-primary" @onclick="siguiente">Siguiente</button>
+}
+
+@code {
+    private int i = 0;
+    
+    private Persona[]? personas;
+
+    protected override async Task OnInitializedAsync()
+    {
+        personas = await Http.GetFromJsonAsync<Persona[]>("sample-data/listaPersonas.json");
+    }
+
+    private void siguiente()
+    {
+        i++;
+        if (i >= personas.Length)
+        {
+            i = 0;
+        }
+    }
+
+    public class Persona
+    {
+        public string? Nombre { get; set; }
+        public string? Apellidos { get; set; }
+        public string? FecNacimiento { get; set; }
+        public int AniosExperiencia { get; set; }
+        public string? Descripcion { get; set; }
+        public string? Empleo { get; set; }
+        public string? Foto { get; set; }
+    }
+}
