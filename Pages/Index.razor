@@ -36,11 +36,11 @@ else
             </tr>
         </tbody>
     </table>
-    <button class="btn btn-primary" @onclick="siguiente">Siguiente</button>
+    <button class="btn btn-primary" @onclick="Siguiente">Siguiente</button>
 }
 
 @code {
-    private int i = 0;
+    private int i;
     
     private Persona[]? personas;
 
@@ -49,10 +49,10 @@ else
         personas = await Http.GetFromJsonAsync<Persona[]>("sample-data/listaPersonas.json");
     }
 
-    private void siguiente()
+    private void Siguiente()
     {
         i++;
-        if (i >= personas.Length)
+        if (personas != null && i >= personas.Length)
         {
             i = 0;
         }
