@@ -36,11 +36,22 @@ else
             </tr>
         </tbody>
     </table>
-    <button class="btn btn-primary" @onclick="Siguiente">Siguiente</button>
+    <button class="btn btn-primary" @onclick="Siguiente">Siguiente</button><br><br>
+
+    <form>
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre" bind="@nombre"><br><br>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos" bind="@nombre"><br><br>
+        <input type="text" id="fecNacimiento" name="fecNacimiento" placeholder="Fecha de nacimiento" bind="@nombre"><br><br>
+        <input type="text" id="aniosExperienci" name="aniosExperienci" placeholder="Años de experiencia" bind="@nombre"><br><br>
+        <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" bind="@nombre"><br><br>
+        <input type="text" id="empleo" name="empleo" placeholder="Empleo" bind="@nombre">
+    </form><br>
+    <button class="btn btn-primary" @onclick="Add">Añadir</button><br><br>
 }
 
 @code {
     private int i;
+    private string nombre;
     
     private Persona[]? personas;
 
@@ -55,6 +66,14 @@ else
         if (personas != null && i >= personas.Length)
         {
             i = 0;
+        }
+    }
+
+    public void Add()
+    {
+        if (nombre != null)
+        {
+            
         }
     }
 
